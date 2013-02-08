@@ -2,10 +2,43 @@
 	font-family: cool_fonts;
 	src: url('gravitat.ttf');
 }
-body{font-size: 18px; margin:50px 0px; padding:0px; background-color: #fff;}
+body{font-size: 18px; background-color: #fff;}
+@keyframes myfirst
+{
+from {background: #222222;}
+to {background: #ffffff; color:#222222;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+from {background: #222222;}
+to {background: #ffffff; color:#222222;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+from {background: #222222; color:#ffffff;}
+to {color:#222222; background: #ffffff; }
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+from {background: #222222;}
+to {background: #ffffff; color:#222222;}
+}
+		.container-header{
+						font-family: 'cool_fonts' !important;position:relative;   width:100%; height:100px; border-radius:5px; 
+						text-align:center; color:#fff; font-size:60px; background-color:#222222;
+						animation-iteration-count:1;
+						-webkit-animation-iteration-count:1;
+						}
+		.container-header:hover{animation:myfirst 10s ;
+						-moz-animation: myfirst 10s; /* Firefox */
+						-webkit-animation: myfirst 10s; /* Safari and Chrome */
+						-o-animation: myfirst 10s; /* Opera */}
         .container-login{
             width:1024px;
-            margin:0px auto;
+            margin:40px auto;
             padding:25px;
             border:0px solid #222222;
             background-color:#fff;
@@ -20,8 +53,7 @@ body{font-size: 18px; margin:50px 0px; padding:0px; background-color: #fff;}
             background-color:#cecece;
             height: auto; 
             color: #000;
-            /*font-size: 18px;*/
-            border-bottom: 30px solid #fff;
+            font-size: 25px;
             font-family: 'cool_fonts' !important;
 			border-radius:15px;
 			margin-top:-20px;
@@ -53,6 +85,7 @@ body{font-size: 18px; margin:50px 0px; padding:0px; background-color: #fff;}
             color:#fff;
             background-color: #393939;
         }
+		.login span:hover{color:#cecece}
         .login .footer-login{
             position: relative;
             bottom: -50px;

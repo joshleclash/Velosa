@@ -12,8 +12,12 @@ include_once '../config/config.php';
     <script src="<?php echo PATCH;?>/js/jquery-ui-1.10.0.custom.js"></script>
     </head>
     <body>
+	<div class="container-header">
+		COMPUVISION! 
+	</div>
         <div class="container-login">
-            <div class="title">Sistema basado en conocimientos para Entrenamiento Inteligente orientado a la Evaluación</div>
+            <div class="title">Sistema de Informacion</div>
+			<div style="height:25px;"></div>
             <span>
                 Sistema de informacion en el cual podra documentar avances en los diferentes actividades dejadas por el docento
                 <br/>
@@ -24,6 +28,7 @@ include_once '../config/config.php';
                 <br/>
                 <br/><br/><br/><br/><br/><br/>
             </span>
+			
             <form class="login" >
                 <span>Iniciar Sesion</span>
                 <table style="padding: 10px; margin-left: 30px; width: 85%">
