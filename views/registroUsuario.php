@@ -11,14 +11,15 @@ include_once '../controller/userController.php';
     <script src="<?php echo PATCH?>/js/jquery-1.9.0.js"></script>
     <script src="<?php echo PATCH?>/js/jquery-ui-1.10.0.custom.js"></script>
     <script src="<?php echo PATCH?>/js/functionsJs.js"></script>
+    
     </head>
-	<div class="container-header">
-		COMPUVISION! 
-	</div>
     <body>
+        <div class="container-header">
+            Carga Red Macro!
+        </div>
         <div class="container-login">
             <div class="title">Sistema basado en conocimientos para Entrenamiento Inteligente orientado a la Evaluación</div>
-			<div style="height:25px;"></div>
+            <div style="height: 20px;"></div>
             <span>
                 Sistema de informacion en el cual podra documentar avances en los diferentes actividades dejadas por el docento
                 <br/>
@@ -31,7 +32,7 @@ include_once '../controller/userController.php';
             </span>
             <form class="login" action="<?php echo PATCH?>/Controller/UserController.php?option=0" id="formLogin" method="POST">
                 <span>Iniciar Sesion</span>
-                <table style="padding: 10px; margin-left: 30px; width: 85%" border="0" cellpadding="5"><!--cellspacing="5"--> 
+                <table style="padding: 10px; margin-left: 30px; width: 85%">
                     <tr>
                         <td>Nombres</td>
                         <td ><input type="text" name="nombres"/></td>

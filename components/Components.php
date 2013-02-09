@@ -123,18 +123,16 @@ class Components{
         }
         
     }
-    public function sendRsForMail($rs=null,$mails=null,$subject=null,$msg=null){
+    public function sendRsForMail($mails=null,$subject=null,$msg=null){
                        
              
             /*GMAIL SENDER MAIL*/
             $mail = new PHPMail();  // Instantiate your new class
-            $mail->IsSMTP(); // enable SMTP
-            $mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
-            $mail->SMTPAuth = true;  // authentication enabled
-            $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-            $mail->Host = 'smtp.gmail.com';
-            $mail->Port = 465;
-                    
+            $mail->Host = "smtp.gmail.com"; //Estableix GMAIL com el servidor SMTP.
+            $mail->SMTPAuth= true; //Habilita la autenticaciÃ³ SMPT.
+            $mail->SMTPSecure="tls"; //Estableix el prefix del servidor.
+            $mail->Port = 587 ; //Estableix el port SMTP.
+            /*USuario y contraseña de la clave de el usuario*/        
             $mail->Username = "joshleclash@gmail.com";
             $mail->Password = "5k4t3b04rd5";
             
@@ -152,15 +150,8 @@ class Components{
                 {
                     $mail->AddAddress($mails);
                 }
-            
-            //**************************/
-            if(is_null($msg)){    
-                $message = $this->createMsgMail($rs);
-            }else{//Enviando mensaje desde el el metodo
-                $message = $msg;
-            }
             $mail->IsHTML(true);
-            $mail->Body = $message;
+            $mail->Body = $msg;
             $send = $mail->Send();
             if($send){
                 return true;

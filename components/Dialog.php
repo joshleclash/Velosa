@@ -2,7 +2,7 @@
 /**Pendienta la construccion
  */
 class Dialog{
-    public static function Message($title=null, $message=null, $autoOpen=true, $caseButons=0,$textButton='OK',$modal=true,$idResponse=null,$codUnidad=null){
+    public static function Message($title=null, $message=null, $autoOpen=true, $caseButons=0,$textButton='OK',$modal=true){
         $dialog='';
         $open = 'autoOpen:'.$autoOpen;
         $idDialog= rand(0, 9999);
@@ -17,29 +17,7 @@ class Dialog{
         case 1:
                 $butons .= self::crearButtons('Confirmar', 'alert("ok");','Cancelar','$(this).dialog("close")');
             break;
-        case 2:
-                $butons .= self::crearButtons('Aceptar', 'BuscarPredio();$(this).dialog("close");');
-            break;
-        case 3:
-                $butons .= self::crearButtons('Aceptar', 'BuscarVerificacionExportadoras("'.$idResponse.'","'.$codUnidad.'");$(this).dialog("close");');
-            break;
-        case 4:
-                $butons .= self::crearButtons('Confirmar', '$(this).dialog("close");var elm = window.parent.limpiar();');
-            break;
-        case 5://SEMILLAS
-                $butons .= self::crearButtons('Aceptar', 'consultarRptSemillas(0,"'.$idResponse.'");$(this).dialog("close");');
-            break;//ConsultarEmpresa(0,0)->Eliminacion de unidadProductora;
-        case 6:
-            $butons .= self::crearButtons('Aceptar', 'ConsultarEmpresa(0,0);$(this).dialog("close");');
-            break;
-        case 7://HLB
-                $butons .= self::crearButtons('Aceptar', 'window.location:"http://www.google.com";$(this).dialog("close");');
-            break;
         }
-        
-        
-        
-        
         echo $dialog;
         if($modal==false)
             {

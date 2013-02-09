@@ -33,9 +33,16 @@ to {background: #ffffff; color:#222222;}
 						-webkit-animation-iteration-count:1;
 						}
 		.container-header:hover{animation:myfirst 10s ;
-						-moz-animation: myfirst 10s; /* Firefox */
-						-webkit-animation: myfirst 10s; /* Safari and Chrome */
-						-o-animation: myfirst 10s; /* Opera */}
+                                        -moz-animation: myfirst 10s; /* Firefox */
+                                        -webkit-animation: myfirst 10s; /* Safari and Chrome */
+                                        -o-animation: myfirst 10s; /* Opera */}
+                .container-header-login{
+                    background-color: #222222;
+                    height: 50px; border-radius: 15px;
+                    padding: 15px;
+                    color: #fff;
+                    font-size: 20px !important;
+                }
         .container-login{
             width:1024px;
             margin:40px auto;
@@ -106,6 +113,19 @@ to {background: #ffffff; color:#222222;}
             box-shadow: 3px 3px 3px #222;
             border: 1px solid #222;
         }
+        input[type="password"]{
+            width: 100%;
+            border: #222222 solid 1px;
+            height: 20px;
+            padding: 2px;
+            margin: 0 auto;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        input[type="password"]:focus{
+            box-shadow: 3px 3px 3px #222;
+            border: 1px solid #222;
+        }
         input[type="button"]{
             width: auto;
             border: #222222 solid 2px;
@@ -123,6 +143,7 @@ to {background: #ffffff; color:#222222;}
         input[type="button"]:hover{
             box-shadow: 1px 1px 3px #000;
         }
+        
         input[type="submit"]{
             width: auto;
             border: #222222 solid 2px;
@@ -149,3 +170,42 @@ to {background: #ffffff; color:#222222;}
             text-shadow: 2px 2px 6px #222;
         }
 
+        .error-response{
+            border:dotted 2px red; color:red; font-size:13px; padding:3px; font-family: 'cool_fonts' !important;
+        }
+        .ok-response{
+            border:dotted 2px green; color:green; font-size:18px; font-family: 'cool_fonts' !important;
+        }
+        /*IN LOGIN OK
+        
+        **/
+        .menu-left{
+            float: left;
+            width: 300px;
+            height: 100%;
+            background-color: #cecece;
+            color: #222222;
+            border-radius: 10px;
+        }
+        .menu-left ul{
+            list-style: none;
+        }
+        .menu-left ul li a{
+            font-family : 'cool_fonts';
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .menu-left ul li ul li a{
+            font-size:12px;
+            color:#fff;
+            font-family : 'cool_fonts';
+            text-decoration: none;
+        }
+        
+        .container-data{
+            width: auto;
+            border-radius: 15px;
+            float: left;
+            margin-left: 10px;
+            height: 100%;
+        }
