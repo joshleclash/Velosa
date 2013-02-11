@@ -199,7 +199,7 @@ if(isset($_REQUEST["option"])){
                 echo $controller->showFormUpload();
             break;
         case 6:
-                echo $controller->adminFiles($_POST["idUsuario"]);
+                echo $controller->adminFiles($_REQUEST["idUsuario"]);
             break;
         case 7:
                 echo $controller->showFormPassword();
