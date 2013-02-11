@@ -21,7 +21,10 @@ if(!isset($_SESSION["_User"]))
             Bienvenido Carga Red Macro!
             
             <?php echo $_SESSION["_User"]->nombreUsuario . " " . $_SESSION["_User"]->apellidoUsuario; ?>
-            <div style="float: right;"><?php echo Components::getDate();?></div>
+            <div style="float: right;"><?php echo Components::getDate();?>
+                <br/>
+                <?php echo $_SESSION["_User"]->nombrePerfil?>    
+            </div>
         </div>
         
         <div class="container-login">
@@ -31,9 +34,10 @@ if(!isset($_SESSION["_User"]))
                     <li>
                         <a>Administracion</a>
                             <ul>
-                                <li><a method="POST" href="#" id="Usuarios" action="'.PATCH.'/Controller/aplicationController.php?option=0 "onClick='."submitObjectData('Usuarios','container-data',{'csc':1})".'>Usuarios</a></li>
-                                <li><a href="#">Archivos</a></li>
-                                
+                                    <li><a method="POST" href="#" id="Usuarios" action="'.PATCH.'/Controller/aplicationController.php?option=0" onClick='."submitObjectData('Usuarios','container-data',{'csc':1})".'>Modificar Permisos Usuarios</a></li>
+                                    <li><a method="POST" href="#" id="AddFilesToUser" action="'.PATCH.'/Controller/aplicationController.php?option=3" onClick='."submitObjectData('AddFilesToUser','container-data',{'csc':1})".'>Ver Archivos de usuario</a></li>
+                                    <li><a method="POST" href="#" id="NewUsuarios" action="'.PATCH.'/Controller/aplicationController.php?option=2" onClick='."submitObjectData('NewUsuarios','container-data',{'csc':1})".'>Crear Usuarios</a></li>
+                                    
                             </ul>
                     </li>
                 </ul>
@@ -41,9 +45,8 @@ if(!isset($_SESSION["_User"]))
                     <li>
                         <a>Archivos</a>
                             <ul>
-                                <li><a href="#">Agregar archivos a usuarios</a></li>
-                                <li><a href="#">Ver todos los archivos</a></li>
-                                <li><a href="#">Cargar archivos</a></li>
+                                <li><a method="POST" href="#" id="showFiles" action="'.PATCH.'/Controller/aplicationController.php?option=4" onClick='."submitObjectData('showFiles','container-data',{'csc':1})".'>Mis Archivos</a></li>
+                                <li><a method="POST" href="#" id="uploadFiles" action="'.PATCH.'/Controller/aplicationController.php?option=5" onClick='."submitObjectData('uploadFiles','container-data',{'csc':1})".'>Cargar archivos</a></li>
                                 
                             </ul>
                     </li>
@@ -52,18 +55,37 @@ if(!isset($_SESSION["_User"]))
                     <li>
                         <a>Mi perfil</a>
                             <ul>
-                                <li><a href="#">Cambiar la contraseña</a></li>
+                                <li><a method="POST" href="#" id="forgotPassword" action="'.PATCH.'/Controller/aplicationController.php?option=7" onClick='."submitObjectData('forgotPassword','container-data',{'csc':1})".'>Cambiar clave</a></li>
                                 <li><a href="index.php?destroySession=true">Salir</a></li>
                             </ul>
                     </li>
                 </ul>
                 ';
-                }else{
+                }else if($_SESSION["_User"]->idPerfil==2){
+                    echo '<ul>
+                    <li>
+                        <a>Archivos</a>
+                            <ul>
+                                <li><a method="POST" href="#" id="showFiles" action="'.PATCH.'/Controller/aplicationController.php?option=4" onClick='."submitObjectData('showFiles','container-data',{'csc':1})".'>Mis Archivos</a></li>
+                                <li><a method="POST" href="#" id="uploadFiles" action="'.PATCH.'/Controller/aplicationController.php?option=5" onClick='."submitObjectData('uploadFiles','container-data',{'csc':1})".'>Cargar archivos</a></li>
+                                
+                            </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a>Mi perfil</a>
+                            <ul>
+                                <li><a method="POST" href="#" id="forgotPassword" action="'.PATCH.'/Controller/aplicationController.php?option=7" onClick='."submitObjectData('forgotPassword','container-data',{'csc':1})".'>Cambiar clave</a></li>
+                                <li><a href="index.php?destroySession=true">Salir</a></li>
+                            </ul>
+                    </li>
+                </ul>';
+                }else{    
                     echo '<ul>
                             <li>
                             <a>Mi perfil</a>
                                 <ul>
-                                    <li><a href="#">Cambiar la contraseña</a></li>
                                     <li><a href="index.php?destroySession=true">Salir</a></li>
                                 </ul>
                             </li>

@@ -178,5 +178,16 @@ class Components{
             return $this->error;
         }
     }
+    public function getMailsByAdmin(){
+        $sql ="select mail from usuario where idPerfil=1";
+        $rs = $this->__executeQuery($sql, $this->getConnect());
+        $mails='';
+        $i=0;
+        while($row=  mysql_fetch_array($rs)):
+        $mails[$i]=$row["mail"];
+            $i++;
+        endwhile;
+        return $mails; 
+    }
 }
 ?>

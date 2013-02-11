@@ -21,7 +21,7 @@ class Dialog{
         echo $dialog;
         if($modal==false)
             {
-            echo '<script>$("#'.$idDialog.'").dialog({'.$open.','.$butons.'});</script>';
+            echo '<script>$("#'.$idDialog.'").dialog({'.$open.','.$butons.',width:500});</script>';
             }
         else
             {

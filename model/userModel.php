@@ -75,12 +75,15 @@ class userModel{
     if(strlen($peticion["password"])<=6){
             return array("codeError"=>0,"msg"=>"La clave es demasiado corta");
         }
-        $SQL="select * from usuario where identificacion=".$peticion["identificacion"];  
+        $SQL="select * from usuario us join perfil per on us.idPerfil=per.idPerfil where identificacion=".$peticion["identificacion"];  
         $rs = $this->components->__executeQuery($SQL,$this->conect);
         $row = mysql_fetch_array($rs);
         if(mysql_affected_rows($this->conect)<=0)
             return array("codeError"=>0,"msg"=>"usuario no resgistrado en el sistema"); 
         else if(is_array($row)){
+            if($row["idPerfil"]==3){
+                return array("codeError"=>1,"msg"=>'Usuario inactivo');  
+            }
             if($row["clave"]==$_REQUEST["password"]){
                 $objectUser= (object) array();
                 foreach($row as $k => $v):
@@ -94,7 +97,39 @@ class userModel{
             }
         }
     }
+    public function forgotPassword($params){
+    $i=0;    
+    foreach($params as $key => $val):
+                if($key!='option')
+                {   
+                 if(empty($val))
+                    {
+                        $i++;
+                    }
+                }
+    endforeach;
+    if($i!=0){
+            return array("codeError"=>0,"msg"=>"Todos los campos deven estar diligenciados");
+        }
+        if($params["oldPassword"]!=$_SESSION["_User"]->clave){
+            return array("codeError"=>0,"msg"=>"Su contraseña dijitada y la almacenada no coinciden");
+        }
+        if(strlen($params["newPassword"])<=6){
+            return array("codeError"=>0,"msg"=>"Su nueva contraseña no es muy segura");
+        }
+        if($params["newPassword"]!=$params["confirmNewPassword"]){
+            return array("codeError"=>0,"msg"=>"Su nueva contraseña y la confirmacion no coinciden");
+        }
+        $sql ="update usuario set clave='".$params["newPassword"]."' where idUsuario=".$_SESSION["_User"]->idUsuario;
+        $rs = $this->components->__executeQuery($sql, $this->conect);
+        if($rs){
+            return array("codeError"=>1,"msg"=>"Contraseña actualizada correctamente");
+        }else{
+            return array("codeError"=>1,"msg"=>"Exisito algun error en la actualizacion de la contraseña");
+        }
         
+    } 
+    
     private function  validateEmail($direccion=null)
         {
            $Sintaxis='#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';

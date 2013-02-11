@@ -11,6 +11,9 @@ class userController{
     public function loginUserController($peticion){
         return $this->userModel->loginUser($peticion);
     }
+    public function forgotPass($peticion){
+        return $this->userModel->forgotPassword($peticion);
+    }
 }
 if(isset($_REQUEST['option'])){
     $userController = new userController();
@@ -31,6 +34,23 @@ if(isset($_REQUEST['option'])){
          }else{
              echo '<div class="ok-response" align="center"><img src="'.PATCH.'/images/icons/accept.png" style="margin-top: -10px;" align="middle">'.$response["msg"].
                         '<script>setTimeout(function(){window.location="aplicationWelcome.php";},2000)</script>'.
+                  '</div>';
+         }
+      }else if($_REQUEST["option"]==3)
+      {
+         $response = $userController->createUserController($_POST);
+         if($response["codeError"]==0){
+             echo Dialog::Message("Error", $response["msg"], true, 0, "Aceptar");
+         }else{
+             echo Dialog::Message("Confirmacion", $response["msg"], true, 0, "Aceptar");
+         }
+      }else if($_REQUEST["option"]==4)
+      {
+         $response =  $userController->forgotPass($_REQUEST);
+         if($response["codeError"]==0){
+             echo '<div class="error-response">'.$response["msg"].'</div>';
+         }else{
+             echo '<div class="ok-response" align="center"><img src="'.PATCH.'/images/icons/accept.png" style="margin-top: -10px;" align="middle">'.$response["msg"].
                   '</div>';
          }
       }  

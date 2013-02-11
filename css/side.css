@@ -209,3 +209,60 @@ to {background: #ffffff; color:#222222;}
             margin-left: 10px;
             height: 100%;
         }
+        /****TABLES***/
+        table{
+            width:710px;
+            border-radius: 5px;
+        }
+        table tr th{
+            background-color: #222222;
+            font-size: 13px;
+            padding: 5px;
+            color:#fff;
+            font-family : 'cool_fonts';
+        }
+        .cebra0{
+            padding: 5px;
+            font-size: 10px;
+            color:#222;
+            background-color: #cecece;
+            font-family : 'cool_fonts';
+        }
+        .cebra1{
+            padding: 5px;
+            font-size: 10px;
+            color:#222;
+            background-color: #f4f4f4;
+            font-family : 'cool_fonts';
+        }
+        #title-span{
+            border:0px dotted #222; padding:5px; color:#222222;
+            font-family : 'cool_fonts';
+            width: 300px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .table{
+            background-color: #f4f4f4;
+            border: 2px dotted #393939;
+        }
+        .table tr th{
+            background-color: #7b7b7b;
+            font-size: 10px;
+            font-family: 'Arial';
+        }
+        .table .cebra0 {
+            padding: 5px;
+            font-size: 10px;
+            color:#222;
+            background-color: #cecece;
+            font-family: 'Arial';
+        }
+        .table  .cebra1{
+            padding: 5px;
+            font-size: 10px;
+            color:#222;
+            font-family: 'Arial';
+            
+        }
+        
