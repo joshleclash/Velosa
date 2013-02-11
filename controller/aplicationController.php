@@ -127,6 +127,17 @@ class aplicationController{
             $table.='</tr>';
             $i=1;
             while($row = mysql_fetch_array($rs)):
+			if($row["typeFile"]=='application/msword')
+			{
+				$img='<img src="'.PATCH.'/images/icons/word_icon.png">';
+			}else if($row["typeFile"]=='application/vnd.ms-excel'){
+				$img='<img src="'.PATCH.'/images/icons/excel_icon.png">';
+			}else if($row["typeFile"]=='application/vnd.ms-powerpoint'){
+				$img='<img src="'.PATCH.'/images/icons/powerpoint_icon.png">';
+			}else{
+				$img='Descargar';
+			}
+			
             $table.='<tr class="cebra'.($i%2).'" id="cebra'.$row["idUsuario"].'">';
             $table.='<th>'.$i.'</th>';
             $table.='<td>'.$row["nombreUsuario"]."-".$row["apellidoUsuario"].'</td>';
@@ -134,7 +145,7 @@ class aplicationController{
             $table.='<td>'.$row["mail"].'</td>';
             $table.='<td>'.$row["identificacion"].'</td>';
             $table.='<td>'.$row["typeFile"].'</td>';
-            $table.='<td><a href="'.$row["routeFile"].'" target="_blank" title="'.$row["nameFile"].'">Descargar</a><td>';
+            $table.='<td align="center"><a href="'.$row["routeFile"].'" target="_blank" title="'.$row["nameFile"].'">'.$img.'</a><td>';
             $table.='</tr>';
             $i++;
             endwhile;
@@ -160,11 +171,21 @@ class aplicationController{
         $table.='</tr>';
             $i=1;
             while($row = mysql_fetch_array($rs)):
+			if($row["typeFile"]=='application/msword')
+			{
+				$img='<img src="'.PATCH.'/images/icons/word_icon.png">';
+			}else if($row["typeFile"]=='application/vnd.ms-excel'){
+				$img='<img src="'.PATCH.'/images/icons/excel_icon.png">';
+			}else if($row["typeFile"]=='application/vnd.ms-powerpoint'){
+				$img='<img src="'.PATCH.'/images/icons/powerpoint_icon.png">';
+			}else{
+				$img='Descargar';
+			}
             $table.='<tr class="cebra'.($i%2).'" id="cebra'.$row["idUsuario"].'">';
             $table.='<td>'.$row["smalldatetime"].'</td>';
             $table.='<td>'.$row["nameFile"].'</td>';
             $table.='<td>'.$row["typeFile"].'</td>';
-            $table.='<td><a href="'.$row["routeFile"].'" target="_blank" title="'.$row["nameFile"].'">Descargar</a><td>';
+            $table.='<td align="center"><a href="'.$row["routeFile"].'" target="_blank" title="'.$row["nameFile"].'">'.$img.'</a><td>';
             $table.='</tr>';
             $i++;
             endwhile;

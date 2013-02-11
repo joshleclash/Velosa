@@ -182,7 +182,8 @@ class Components{
         $sql ="select mail from usuario where idPerfil=1";
         $rs = $this->__executeQuery($sql, $this->getConnect());
         $mails='';
-        $i=0;
+        $i=1;
+		$mails[0]=$_SESSION["_User"]->mail;
         while($row=  mysql_fetch_array($rs)):
         $mails[$i]=$row["mail"];
             $i++;
