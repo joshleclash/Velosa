@@ -38,13 +38,12 @@ if(isset($_FILES["file"])){
 						   typeFile='".$_FILES["file"]["type"]."' where idArchivo=".$row["idArchivo"];
 				$rs = $components->__executeQuery($update, $components->getConnect());	
 				$mails = $components->getMailsByAdmin();
-				print_r($mails);
-				$msg="Se&ntilde;or(a) Administrador,<br/><br/>";
+								$msg="Se&ntilde;or(a) Administrador,<br/><br/>";
 				$msg.="El usuario ".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario."a modificado  un archivo a el sistema<br/><br/>";
 				$msg.="Nombre Archivo:".$_FILES["file"]["name"]."<br/>";
 				$msg.="Tipo Archivo:".$_FILES["file"]["type"]."<br/><br/>";
 				$msg.="Señor usuario favor no responda este correo<br/>Correo generado automaticamente".Components::getDate();
-				$sendMail = $components->sendRsForMail($mails, "Archivo Cargado al sistema", $msg);
+				$sendMail =true;// $components->sendRsForMail($mails, "Archivo Cargado al sistema", $msg);
 					if($rs)
 					{	
 						if(!$sendMail){
