@@ -18,9 +18,8 @@ if(isset($_REQUEST["destroySession"]))
     <body>
         <div class="container-header">
             <div style="float: left; width: auto; padding: 5px;">
-                <img src="../images/logo.png" style="height: 90px;">
-            </div>Carga Red Macro!
-            <img src="../images/logo.png" style="height:50px;"/>Carga Red Macro!
+                <img src="<?php echo PATCH;?>/images/logo.png" style="height: 90px;">
+            </div> BT- CONSULTORES!
         </div>
         
         <div class="container-login">
