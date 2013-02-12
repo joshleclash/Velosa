@@ -17,7 +17,7 @@ if(isset($_REQUEST["destroySession"]))
     </head>
     <body>
         <div class="container-header">
-            Carga Red Macro!
+            <img src="../images/logo.png" style="height:50px;"/>Carga Red Macro!
         </div>
         
         <div class="container-login">
