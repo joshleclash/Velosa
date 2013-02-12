@@ -17,7 +17,9 @@ if(isset($_REQUEST["destroySession"]))
     </head>
     <body>
         <div class="container-header">
-            Carga Red Macro!
+            <div style="float: left; width: auto; padding: 5px;">
+                <img src="../images/logo.png" style="height: 90px;">
+            </div>Carga Red Macro!
         </div>
         
         <div class="container-login">
@@ -34,7 +36,7 @@ if(isset($_REQUEST["destroySession"]))
                 <br/>
                 <br/><br/><br/><br/><br/><br/>
             </span>
-            <form class="login" action="<?php echo PATCH?>/Controller/UserController.php?option=1" id="formLogin" method="POST">
+            <form class="login" action="<?php echo PATCH?>/controller/userController.php?option=1" id="formLogin" method="POST">
                 <span>Iniciar Sesion</span>
                 <table style="padding: 10px; margin-left: 30px; width: 85%">
                     <tr>

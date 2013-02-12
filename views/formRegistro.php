@@ -1,5 +1,5 @@
 <div style="width: 700px;  height: 395px; padding-top: 50px;" align="center">
-<form class="login" action="<?php echo PATCH?>/Controller/UserController.php?option=3" id="formLogin" method="POST" style="background-color: #fff;">
+<form class="login" action="<?php echo PATCH?>/controller/userController.php?option=3" id="formLogin" method="POST" style="background-color: #fff;">
                 <span>Registrar Nuevo Usuario</span>
                 <table style="padding: 10px; margin-left: 30px; width: 85%">
                     <tr>

@@ -1,18 +1,18 @@
 <?php
 //componente creadopor juan russi
 require_once('Dialog.php');
-require_once('Config.php');
+require_once('../config/config.php');
 require_once('PHPMail.php');
 //Example for use Dialog
 //Dialog::Message('pedrito', 'hola', true);
 class Components{
-    public $dbName="velosa";
+    public $dbName="btconsul_velosa";
     private $conect;
     protected $error='error';
     private static $date=null;
-    private $server='localhost';
-    private $user="root";
-    private $password="";
+    private $server='cv5.compuvisionenlinea.com';
+    private $user="btconsul_toor";
+    private $password="80200532@";
     public function __construct() {
         $this->conect = mysql_connect($this->server, $this->user, $this->password);
         mysql_select_db($this->dbName, $this->conect);
