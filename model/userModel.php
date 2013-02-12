@@ -14,20 +14,7 @@ class userModel{
         for($i=0;$i<=10;$i++):
             $temp .= substr($string,rand(0,62),1);
         endfor;
-	$i=0;	
-        foreach($_REQUEST as $key => $val):
-                if($key!='option')
-                {   
-                 if(empty($val))
-                    {
-                        $i++;
-                    }
-                }
-        endforeach;
-        if($i!=0){
-            return array("codeError"=>0,"msg"=>"Todos los campos deven estar diligenciados");
-        }
-            if(!is_numeric($_REQUEST["celular"]))
+	    if(!is_numeric($_REQUEST["celular"]))
                             return array("codeError"=>0,"msg"=>'Error en el numero de celular');
         if($this->validateEmail($_REQUEST["mail"])==false)
 		return array("codeError"=>0,"msg"=>'Error en le formato de email');
@@ -58,17 +45,13 @@ class userModel{
     public function loginUser($peticion=null){
         $i=0;    
     foreach($peticion as $key => $val):
-                if($key!='option')
-                {   
+                   
                  if(empty($val))
                     {
                         $i++;
                     }
-                }
+                
     endforeach;
-    if($i!=0){
-            return array("codeError"=>0,"msg"=>"Todos los campos deven estar diligenciados");
-        }
     if(!is_numeric($peticion["identificacion"])) {
        return array("codeError"=>0,"msg"=>"El usuario no puede contener caracteres deve ser numerico"); 
     }   

@@ -30,7 +30,7 @@ class aplicationController{
         $table.='<td>'.$row["mail"].'</td>';
         $table.='<td>'.$row["identificacion"].'</td>';
         $table.='<td>';
-                $table.='<select name="perfil" link="../Controller/aplicationController.php?option=1" onChange="'.'sendValueForOption(this,'.$row["idUsuario"].');'.'" id="option'.$row["idUsuario"].'">';
+                $table.='<select name="perfil" link="../controller/aplicationController.php?option=1" onChange="'.'sendValueForOption(this,'.$row["idUsuario"].');'.'" id="option'.$row["idUsuario"].'">';
                     $table.=$this->showProfilesOptionSelect($row["idPerfil"]);
                     $table.=$this->showProfilesOptionSelect();
                 $table.='</select>';
@@ -96,7 +96,7 @@ class aplicationController{
         $table.='<td>';
                 $table.='<img src="../images/icons/add.png" title="Agregar archivos a usuario" 
                         onClick='."submitObjectData('parametros$row[idUsuario]','AddFilesResponse$row[idUsuario]',{idUsuario:$row[idUsuario]});".'
-                     id="parametros'.$row["idUsuario"].'" action="'.PATCH.'/Controller/aplicationController.php?option=6" method="POST">';
+                     id="parametros'.$row["idUsuario"].'" action="'.PATCH.'/controller/aplicationController.php?option=6" method="POST">';
         $table.='<td>';
         $table.='</tr>';
         $table.='<tr><td colspan="7"><div id="AddFilesResponse'.$row["idUsuario"].'" align="center"></div></td></tr>';
