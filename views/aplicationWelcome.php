@@ -16,7 +16,7 @@ if(!isset($_SESSION["_User"]))
     <script src="<?php echo PATCH;?>/js/jquery-ui-1.10.0.custom.js"></script>
     <script src="<?php echo PATCH?>/js/functionsJs.js"></script>
     </head>
-    <body>
+    <body onLoad="submitObjectData('showFiles','container-data',{'csc':1});">
         <div class="container-header-login">
             Bienvenido Carga Red Macro!
             

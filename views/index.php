@@ -24,7 +24,7 @@ if(isset($_REQUEST["destroySession"]))
         
         <div class="container-login">
             
-            <div class="title">Sistema basado en conocimientos para Entrenamiento Inteligente orientado a la Evaluación</div>
+            <div class="title">Bt- Consultores! SISTEMA DE INFORMACION</div>
             <div style="height: 20px;"></div>
             <span>
                 Sistema de informacion en el cual podra documentar avances en los diferentes actividades dejadas por el docento
