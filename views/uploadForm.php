@@ -36,14 +36,16 @@ if(isset($_FILES["file"])){
 					$file = addslashes(file_get_contents("uploads/".$nameFile));	
 				}else
 				{
-					$file = file_get_contents("uploads/".$_FILES["file"]["name"]);
+					$file = addslashes(file_get_contents("uploads/".$_FILES["file"]["name"]));
 				}
 				
-					$sql = "INSERT INTO archivo
-						(idUsuario, routeFile, nameFile, smalldatetime, estate, typeFile,blobFile,description) 
-						VALUES (".$_SESSION["_User"]->idUsuario.", 'uploads/".$nameFile."', '".$nameFile."', '".Components::getDate()."', 'activo', '".$_FILES["file"]["type"]."',
-								'".$file."','Mierda');";
-							$rs = $components->__executeQuery($sql, $components->getConnect());
+					$sql = 'INSERT INTO archivo
+						(idUsuario, routeFile, nameFile, smalldatetime, estate, typeFile,blobFile,description,size) 
+						VALUES ('.$_SESSION["_User"]->idUsuario.',"'."uploads/".$nameFile.'","'.$nameFile.'","'.Components::getDate().'","activo",'.
+                                                '"'.$_FILES["file"]["type"].'","'.$file.'","tets","'.$_FILES["file"]["size"].'"'.
+                                                ')';
+                                        		$rs = $components->__executeQuery($sql, $components->getConnect());
+                                                        
 							$mails = $components->getMailsByAdmin();
 							$msg="Se&ntilde;or(a) Administrador,<br/><br/>";
 							$msg.="El usuario ".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario."a cargado un archivo a el sistema<br/><br/>";
