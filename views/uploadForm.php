@@ -28,16 +28,21 @@ if(isset($_FILES["file"])){
     if($_FILES["file"]["size"]<=8388600)
     {
 		$components = New Components();
-		$apuntador=fopen($_FILES['file']['tmp_name'], 'r');
-		$arhive=fread($apuntador, filesize($_FILES['file']['tmp_name']));
-		fclose($apuntador);
 		$nameFile = str_replace(" ","",$_FILES["file"]["name"]);
-		if(move_uploaded_file($_FILES["file"]["tmp_name"],"uploads/".$_FILES["file"]["name"]))
+		if(move_uploaded_file($_FILES["file"]["tmp_name"],"uploads/".$nameFile))
 				{
+				if(!get_magic_quotes_gpc())
+				{
+					$file = addslashes(file_get_contents("uploads/".$nameFile));	
+				}else
+				{
+					$file = file_get_contents("uploads/".$_FILES["file"]["name"]);
+				}
+				
 					$sql = "INSERT INTO archivo
 						(idUsuario, routeFile, nameFile, smalldatetime, estate, typeFile,blobFile,description) 
 						VALUES (".$_SESSION["_User"]->idUsuario.", 'uploads/".$nameFile."', '".$nameFile."', '".Components::getDate()."', 'activo', '".$_FILES["file"]["type"]."',
-								'".addslashes($arhive)."','Mierda');";
+								'".$file."','Mierda');";
 							$rs = $components->__executeQuery($sql, $components->getConnect());
 							$mails = $components->getMailsByAdmin();
 							$msg="Se&ntilde;or(a) Administrador,<br/><br/>";
