@@ -128,16 +128,16 @@ class Components{
              
             /*GMAIL SENDER MAIL*/
             $mail = new PHPMail();  // Instantiate your new class
-            $mail->Host = "smtp.gmail.com"; //Estableix GMAIL com el servidor SMTP.
+            $mail->Host = "mail.btconsultores.com.co"; //Estableix GMAIL com el servidor SMTP.
             $mail->SMTPAuth= true; //Habilita la autenticaciÃ³ SMPT.
-            $mail->SMTPSecure="tls"; //Estableix el prefix del servidor.
-            $mail->Port = 587 ; //Estableix el port SMTP.
+            //$mail->SMTPSecure="tls"; //Estableix el prefix del servidor.
+            $mail->Port = 25 ; //Estableix el port SMTP.
             /*USuario y contraseña de la clave de el usuario*/        
-            $mail->Username = "joshleclash@gmail.com";
-            $mail->Password = "5k4t3b04rd5";
+            $mail->Username = "noreply@btconsultores.com.co";
+            $mail->Password = "80200532";
             
-            $mail->From = 'sisfito@ica.gov.co';
-            $mail->FromName = "Juan Pablo Russi";
+            $mail->From = 'noreply@btconsultores.com.co';
+            $mail->FromName = "Master Admin";
             $mail->Subject = $subject;
            
             if(is_array($mails))
