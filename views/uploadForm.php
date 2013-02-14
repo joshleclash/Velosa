@@ -30,43 +30,34 @@ if(isset($_FILES["file"])){
 		$components = New Components();
 		$nameFile = str_replace(" ","",$_FILES["file"]["name"]);
                 $file = addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
-                $sql = 'INSERT INTO archivo
+				if(move_upload_file($_FILES["file"]["tmp_name"],'uploads/'.$nameFile))
+				{
+					$sql = 'INSERT INTO archivo
                         (idUsuario, routeFile, nameFile, smalldatetime, estate, typeFile,blobFile,description,size) 
                         VALUES ('.$_SESSION["_User"]->idUsuario.',"'."uploads/".$nameFile.'","'.$nameFile.'","'.Components::getDate().'","activo",'.
                         '"'.$_FILES["file"]["type"].'","'.$file.'","tets","'.$_FILES["file"]["size"].'"'.
                         ')';
-                $rs = $components->__executeQuery($sql, $components->getConnect());
-                $mails = $components->getMailsByAdmin();
-                $msg="<strong>Se&ntilde;or(a):</strong> Administrador,<br/><br/><br/><br/>";
-                $msg.="El usuario ".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario."a cargado un archivo a el sistema<br/><br/>";
-                $msg.="<strong>Nombre Archivo:</strong>".$_FILES["file"]["name"]."<br/>";
-                $msg.="<strong>Tipo Archivo:</strong>".$_FILES["file"]["type"]."<br/><br/><br/><br/><br/>";
-                $msg.="Señor usuario favor no responda este correo<br/>Correo generado automaticamente".Components::getDate();
-                $sendMail = $components->sendRsForMail($mails, "Archivo Cargado al sistema", $msg);
-                if(!$rs || !$sendMail)
-                {
-                         echo '<div class="error-response">Exisito algun  error intentelo nuevamente</div>';
-                }
-                else
-                {
-                         echo '<div class="ok-response" align="center"><img src="'.PATCH.'/images/icons/accept.png" style="margin-top: -10px;" align="middle">'.
-                                         'Archivo cargado correctamente'.
-                                  '</div>';
-                }
-                exit;
-		if(move_uploaded_file($_FILES["file"]["tmp_name"],"uploads/".$nameFile))
-				{
-				if(!get_magic_quotes_gpc())
-				{
-					$file = addslashes(file_get_contents("uploads/".$nameFile));	
-				}else
-				{
-					$file = addslashes(file_get_contents("uploads/".$_FILES["file"]["name"]));
+						$rs = $components->__executeQuery($sql, $components->getConnect());
+						$mails = $components->getMailsByAdmin();
+						$msg="<strong>Se&ntilde;or(a):</strong> Administrador,<br/><br/><br/><br/>";
+						$msg.="El usuario ".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario."a cargado un archivo a el sistema<br/><br/>";
+						$msg.="<strong>Nombre Archivo:</strong>".$_FILES["file"]["name"]."<br/>";
+						$msg.="<strong>Tipo Archivo:</strong>".$_FILES["file"]["type"]."<br/><br/><br/><br/><br/>";
+						$msg.="Señor usuario favor no responda este correo<br/>Correo generado automaticamente".Components::getDate();
+						$sendMail = $components->sendRsForMail($mails, "Archivo Cargado al sistema", $msg);
+						if(!$rs || !$sendMail)
+						{
+								 echo '<div class="error-response">Exisito algun  error intentelo nuevamente</div>';
+						}
+						else
+						{
+								 echo '<div class="ok-response" align="center"><img src="'.PATCH.'/images/icons/accept.png" style="margin-top: -10px;" align="middle">'.
+												 'Archivo cargado correctamente'.
+										  '</div>';
+						}
 				}
-				
-					                
-                                                        
-				}
+                
+                
 	}else{
         echo '<div class="error-response">El archivo es demasido grande</div>';
     }

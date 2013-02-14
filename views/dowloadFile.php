@@ -8,15 +8,15 @@ if(isset($_REQUEST["id"])){
     $row     = mysql_fetch_object($rs);
     //@header("Content-type: application/force-download");
     //@header("Content-Transfer-Encoding: Binary");
-    header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
-    header("Content-type:   application/x-msexcel; charset=utf-8");
+    //header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+    //header("Content-type:   application/x-msexcel; charset=utf-8");
     
-    //@header('Content-type:'. $row->typeFile);
-    @header('Content-length:'. $row->size);
+    //@header("Content-type:{$row->typeFile}");
+    //@header('Content-length:'. $row->size);
     //@header('Content-Disposition: attachment; filename='. $row->nameFile);
     //@header('Content-Description: PHP Generated Data');
-    //echo $row->blobFile;
-    echo $row->typeFile;
+    print $row->blobFile;
+    //echo $row->typeFile;
     
 }
 ?>
