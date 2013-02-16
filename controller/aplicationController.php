@@ -104,7 +104,7 @@ class aplicationController{
         endwhile;
         return $table;
     }
-    public function showFormUpload(){
+    public function showFormUpload($idArchivo=0){
         include_once '../views/uploadFilesForm.php';
     }
     public function showAllFiles($idUser=null){
@@ -130,7 +130,7 @@ class aplicationController{
 			if($row["typeFile"]=='application/msword')
 			{
 				$img='<img src="'.PATCH.'/images/icons/word_icon.png">';
-			}else if($row["typeFile"]=='application/vnd.ms-excel'){
+			}else if($row["typeFile"]=='application/vnd.ms-excel' || $row["typeFile"]=='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
 				$img='<img src="'.PATCH.'/images/icons/excel_icon.png">';
 			}else if($row["typeFile"]=='application/vnd.ms-powerpoint'){
 				$img='<img src="'.PATCH.'/images/icons/powerpoint_icon.png">';
@@ -167,25 +167,49 @@ class aplicationController{
         $table.='<th>Fecha Creacion</th>';
         $table.='<th>Nombre Archivo</th>';
         $table.='<th>Typo Archivo</th>';
-        $table.='<th>Ver</th>';
+        if($_SESSION["_User"]->nombrePerfil)
+            {
+            $table.='<th>Nombre Usuario</th>';
+            $table.='<th>Asignar usuario</th>';
+            }
+        $table.='<th>Descargar</th>';
+        $table.='<th>Modificar</th>';
+        
         $table.='</tr>';
             $i=1;
             while($row = mysql_fetch_array($rs)):
 			if($row["typeFile"]=='application/msword')
 			{
 				$img='<img src="'.PATCH.'/images/icons/word_icon.png">';
-			}else if($row["typeFile"]=='application/vnd.ms-excel'){
+                                $file="Word";
+			}else if($row["typeFile"]=='application/vnd.ms-excel'|| $row["typeFile"]=='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
 				$img='<img src="'.PATCH.'/images/icons/excel_icon.png">';
+                                $file="Excel";
 			}else if($row["typeFile"]=='application/vnd.ms-powerpoint'){
 				$img='<img src="'.PATCH.'/images/icons/powerpoint_icon.png">';
+                                $file="Power Point";
 			}else{
+                                $file="Otro";
 				$img='Descargar';
 			}
             $table.='<tr class="cebra'.($i%2).'" id="cebra'.$row["idUsuario"].'">';
-            $table.='<td>'.$row["smalldatetime"].'</td>';
-            $table.='<td>'.$row["nameFile"].'</td>';
-            $table.='<td>'.$row["typeFile"].'</td>';
-            $table.='<td align="center"><a href="'.$row["routeFile"].'" target="_blank" title="'.$row["nameFile"].'">'.$img.'</a><td>';
+            $table.='<td align="center">'.$row["smalldatetime"].'</td>';
+            $table.='<td align="center">'.$row["nameFile"].'</td>';
+            $table.='<td align="center">'.$file.'</td>';
+            if($_SESSION["_User"]->nombrePerfil)
+            {
+            $table.='<td align="center">'.$row["nombreUsuario"].'-'.$row["apellidoUsuario"].'</td>';
+            $table.='<td align="center">option</td>';
+            }
+            $table.='<td align="center"><a href="'.$row["routeFile"].'" target="_blank" title="'.$row["nameFile"].'">'.$img.'</a></td>';
+            $table.='<td align="center">
+                            <img src="../images/icons/application_form_edit.png" title="'.$row["nameFile"].'" id="updateFile'.$row["idUsuario"].'"
+                                method="POST" action="'.PATCH.'/controller/aplicationController.php?option=5"
+                                onClick='."submitObjectData('updateFile$row[idUsuario]','reponse-update$row[idUsuario]',{idArchivo:$row[idArchivo]});".'>
+                    </td>';
+            $table.='</tr>';
+            $table.='<tr colspan="5">';
+            $table.='<td><div id="reponse-update'.$row["idUsuario"].'"></div></td>';
             $table.='</tr>';
             $i++;
             endwhile;
@@ -196,6 +220,9 @@ class aplicationController{
     }  
     public function showFormPassword(){
         include_once '../views/forgotPasswordForm.php';
+    }
+    public function updateFileDialog(){
+        echo Dialog::Message($title, $message, $autoOpen, $caseButons, $textButton, false);
     }
 }
 if(isset($_REQUEST["option"])){
@@ -214,16 +241,19 @@ if(isset($_REQUEST["option"])){
                echo $controller->addFilesToUser();
             break;
         case 4:
-               echo $controller->showAllFiles($_SESSION["_User"]->idUsuario);
+               echo $controller->adminFiles($_SESSION["_User"]->idUsuario);
             break;
         case 5:
-                echo $controller->showFormUpload();
+                echo $controller->showFormUpload(@$_REQUEST["idArchivo"]);
             break;
         case 6:
                 echo $controller->adminFiles($_REQUEST["idUsuario"]);
             break;
         case 7:
                 echo $controller->showFormPassword();
+            break;
+        case 8:
+             echo $controller->adminFiles();
             break;
         default:
             echo Dialog::Message("Error", "Existio algun error valide su informacion", true, 0, "Aceptar", true);

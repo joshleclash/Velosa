@@ -8,6 +8,12 @@ class userModel{
         $this->components = new Components();
         $this->conect=$this->components->getConnect();
     }
+    public function  userExist(){
+    $sql ="select * from usuario where identificacion=".$_REQUEST["identificacion"];
+        $rs = $this->components->__executeQuery($sql, $this->components->getConnect());
+        $rows = mysql_num_rows($rs);
+        return $rows;
+    }
     public function createUser(){
         $string = '@#&0987654321ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $temp="";
@@ -18,9 +24,11 @@ class userModel{
                             return array("codeError"=>0,"msg"=>'Error en el numero de celular');
         if($this->validateEmail($_REQUEST["mail"])==false)
 		return array("codeError"=>0,"msg"=>'Error en le formato de email');
-	    if(!is_numeric($_REQUEST["identificacion"]))
+	if(!is_numeric($_REQUEST["identificacion"]))
                 return array("codeError"=>0,"msg"=>"Error en el formato de numero de documento");
-        
+        if($this->userExist()>=1){
+            return array("codeError"=>0,"msg"=>'Este usuario ya esta registrado en el sistema');
+        }
         $sql = "INSERT INTO usuario
                 (nombreUsuario, apellidoUsuario, celular, mail, clave, identificacion) 
                 VALUES ('$_REQUEST[nombres]', '$_REQUEST[apellidos]', '$_REQUEST[celular]', '$_REQUEST[mail]', '".$temp."', $_REQUEST[identificacion]);";
@@ -29,8 +37,8 @@ class userModel{
                 if($rs)
                     {
                         $msg = "<strong>Bienvenido</strong><br/>";
-                        $msg .= "<strong>Señor(a)</strong>: $_REQUEST[nombres]  $_REQUEST[apellidos]";
-                        $msg .= "Su usuario fue creado correctamente favor ingrese a nuestro sistema su numobre de usuario es su numero de indetificacion<br/><br/>";
+                        $msg .= "<strong>Señor(a)</strong>:<br/>$_REQUEST[nombres]  $_REQUEST[apellidos]";
+                        $msg .= "Su usuario fue creado correctamente favor ingrese a nuestro sistema.<br/><br/>";
                         $msg .= "<strong>Identificacion:</strong>$_REQUEST[identificacion]<br/>";
                         $msg .= "<strong>Clave:$temp</strong><br/>";
                         $msg .= "<br/><br/><br/><br/><br/>";
