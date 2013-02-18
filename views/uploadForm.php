@@ -100,7 +100,7 @@
                                                     echo '<div class="error-response">Error al modificar el archivo por favor intentelo nuevamente</div>';
                                                 }else{
                                                     echo '<div class="ok-response" align="center"><img src="'.PATCH.'/images/icons/accept.png" style="margin-top: -10px;" align="middle">'.
-                                                                                                                             'Archivo cargado correctamente'.
+                                                                                                                             'Archivo cargado correctamente y notificacion enviada correctamente al administrador de el sistema'.
                                                                                                               '</div>';
                                                 }
                                     }

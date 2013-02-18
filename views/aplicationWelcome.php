@@ -18,8 +18,7 @@ if(!isset($_SESSION["_User"]))
     </head>
     <body onLoad="submitObjectData('showFiles','container-data',{'csc':1});">
         <div class="container-header-login">
-            Bienvenido Carga Red Macro!
-            
+            Bienvenido BT- CONSULTORES!
             <?php echo $_SESSION["_User"]->nombreUsuario . " " . $_SESSION["_User"]->apellidoUsuario; ?>
             <div style="float: right;"><?php echo Components::getDate();?>
                 <br/>
