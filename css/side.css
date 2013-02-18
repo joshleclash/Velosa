@@ -184,10 +184,12 @@ body{font-size: 18px; background-color: #fff;}
             float: left;
             margin-left: 10px;
             height: 100%;
+            overflow-y: scroll;
+            padding: 5px;
         }
         /****TABLES***/
         table{
-            width:710px;
+            width:95%;
             border-radius: 5px;
         }
         table tr th{
@@ -221,6 +223,7 @@ body{font-size: 18px; background-color: #fff;}
         .table{
             background-color: #f4f4f4;
             border: 2px dotted #393939;
+            width:  95%;
         }
         .table tr th{
             background-color: #7b7b7b;

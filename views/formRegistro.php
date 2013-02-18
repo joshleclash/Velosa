@@ -33,7 +33,12 @@
                         <td>
                             <input type="button" value="Registrar" onclick="submitObjectData('formLogin','idResponse',$('#formLogin').serializeArray());"/>  
                         </td>
-                        <td><input type="button" value="Volver" onClick='window.location="index.php"'/>  </td>
+                        <td>
+                            <?php if(!isset($_SESSION["_User"])){
+                                      echo '<input type="button" value="Volver" onClick='."window.location=index.php".'/>';
+                            }?>
+                                  
+                        </td>
                     </tr>
                 </table>
                 <div id="idResponse"></div>
