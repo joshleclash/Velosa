@@ -17,17 +17,18 @@ if(isset($_REQUEST["destroySession"]))
     </head>
     <body>
         <div class="container-header">
-            <div style="float: left; width: auto; padding: 5px;">
-                <img src="<?php echo PATCH;?>/images/logo.png" style="height: 90px;">
-            </div> BT- CONSULTORES!
+            <div style="float: left; width: auto; padding: 0px;">
+                <img src="<?php echo PATCH;?>/images/logo.png" style="height: 100px; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+            </div>
+            
         </div>
         
         <div class="container-login">
             
-            <div class="title">Bt- Consultores! SISTEMA DE INFORMACION</div>
+            <div class="title">Bt- Consultores SISTEMA DE INFORMACION</div>
             <div style="height: 20px;"></div>
             <span>
-                Sistema de informacion en el cual podra documentar avances en los diferentes actividades dejadas por el docento
+                sistema documental por la cual podrá enterarce de los avances de sus proyectos.
                 <br/>
                 <br/>
                 <br/><br/>
