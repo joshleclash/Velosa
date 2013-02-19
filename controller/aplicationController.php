@@ -153,6 +153,7 @@ class aplicationController{
 
     }  
     public function adminFiles($idUser=null){
+        $modelUser = new userModel();
         if($idUser==null){
             $sql = "SELECT *  FROM archivo file join usuario us on us.idUsuario=file.idUsuario and file.estate='activo'";
         }else{
@@ -162,12 +163,13 @@ class aplicationController{
         if(mysql_num_rows($rs)<=0){
             return '<span class="error-response">No se encontraron archivos para este usuario</span>';
         }
+        $j=0;
         $table='<table border="0" CELLSPACING="0" CELLSPACING="0" class="table">';
         $table.='<tr>';
         $table.='<th>Fecha Creacion</th>';
         $table.='<th>Nombre Archivo</th>';
         $table.='<th>Typo Archivo</th>';
-        if($_SESSION["_User"]->nombrePerfil)
+        if($_SESSION["_User"]->nombrePerfil=="Administrador")
             {
             $table.='<th>Nombre Usuario</th>';
             $table.='<th>Asignar usuario</th>';
@@ -196,22 +198,42 @@ class aplicationController{
             $table.='<td align="center">'.$row["smalldatetime"].'</td>';
             $table.='<td align="center">'.$row["nameFile"].'</td>';
             $table.='<td align="center">'.$file.'</td>';
-            if($_SESSION["_User"]->nombrePerfil)
+            if($_SESSION["_User"]->nombrePerfil=="Administrador")
             {
+            $rsUser = $modelUser->showUser();    
             $table.='<td align="center">'.$row["nombreUsuario"].'-'.$row["apellidoUsuario"].'</td>';
-            $table.='<td align="center">option</td>';
+            $table.='<td align="center">';
+            $cont=0;
+            while($rowUser = mysql_fetch_object($rsUser)):
+                if($cont==0)
+                    {
+                        $option = '<select id="option'.$row["idArchivo"].'" name="usuarioName" style="max-width:150px;" method="POST" 
+                                    action="'.PATCH.'/controller/aplicationController.php?option=9" 
+                                        onChange='."submitObjectData('option$row[idArchivo]','reponse-update$j',{'idUsuario':$rowUser->idUsuario,'idArchivo':$row[idArchivo],'email':'$row[mail]'});".'>';
+                        //."".
+                        $option.='<option>--</opion>';
+                        
+                    }
+                    $option.='<option value="'.$rowUser->idUsuario.'" >'.$rowUser->nombreUsuario.'-'.$rowUser->apellidoUsuario.'</opion>';
+                    $cont++;
+                endwhile;
+                $option .= '</select>';   
+            $table.=$option;
+                        
+            $table.='</td>';
             }
             $table.='<td align="center"><a href="'.$row["routeFile"].'" target="_blank" title="'.$row["nameFile"].'">'.$img.'</a></td>';
             $table.='<td align="center">
                             <img src="../images/icons/application_form_edit.png" title="'.$row["nameFile"].'" id="updateFile'.$row["idUsuario"].'"
                                 method="POST" action="'.PATCH.'/controller/aplicationController.php?option=5"
-                                onClick='."submitObjectData('updateFile$row[idUsuario]','reponse-update$row[idUsuario]',{idArchivo:$row[idArchivo]});".'>
+                                onClick='."submitObjectData('updateFile$row[idUsuario]','reponse-update$j',{idArchivo:$row[idArchivo]});".'>
                     </td>';
             $table.='</tr>';
             $table.='<tr colspan="5">';
-            $table.='<td><div id="reponse-update'.$row["idUsuario"].'"></div></td>';
+            $table.='<td><div id="reponse-update'.$j.'"></div></td>';
             $table.='</tr>';
             $i++;
+            $j++;
             endwhile;
             return $table;
     }
@@ -223,6 +245,33 @@ class aplicationController{
     }
     public function updateFileDialog(){
         echo Dialog::Message($title, $message, $autoOpen, $caseButons, $textButton, false);
+    }
+    public function updateAdminFile($idUsuario=null,$idArchivo=null,$mail=null){
+        $sqlUp = "update archivo set idUsuario=$idUsuario where idArchivo=$idArchivo";
+        $rsUp = $this->components->__executeQuery($sqlUp, $this->components->getConnect());
+        if($rsUp){
+            $sql = "Select * from archivo file join usuario user on user.idUsuario=file.idUsuario where idArchivo=$idArchivo";
+            $rs = $this->components->__executeQuery($sql, $this->components);
+            $row = mysql_fetch_object($rs);
+                    if(!is_null($mail)){
+                        $msg = "Señor Usuario<br/><br/><strong>$row->nombreUsuario - $row->apellidoUsuario</strong>";
+                        $msg .= "El administrador de el sistema le agrego un nuevo archivo a su pefil<br/><br/>";
+                        $msg .= "Por favor ingrese al sistema si desea modificar o ver el documento<br/>";
+                        $msg .= "Nombre Documento:$row->nameFile<br/>";
+                        $msg .= "<strong>Observaciones:</strong><br/><br/>$row->description]<br/><br/>";
+                        $msg .= "Mensaje generado automaticamente por favor no responder<br/>";
+                        $msg .= $this->components->getDate();
+                        $mails = $this->components->sendRsForMail(array($mail,$_SESSION["_User"]->mail), "El administrador le asigno un nuevo archivo", $msg);
+                        if($mails){
+                            return Dialog::Message("Confirmacion", "Se envio una notificacion a el usuario al cual le  fue asignado el archvivo", true, 
+                                                0, "Aceptar");
+                        }else{
+                            return Dialog::Message("Error", "Existio algun error al notificar al usuario intentelo nuevamente", true, 
+                                                0, "Aceptar");
+                        }
+                        
+                    }
+        }
     }
 }
 if(isset($_REQUEST["option"])){
@@ -244,6 +293,7 @@ if(isset($_REQUEST["option"])){
                echo $controller->adminFiles($_SESSION["_User"]->idUsuario);
             break;
         case 5:
+            
                 echo $controller->showFormUpload(@$_REQUEST["idArchivo"]);
             break;
         case 6:
@@ -254,6 +304,10 @@ if(isset($_REQUEST["option"])){
             break;
         case 8:
              echo $controller->adminFiles();
+            break;
+        case 9:
+                     
+                echo $controller->updateAdminFile($_POST['idUsuario'],$_POST['idArchivo'],$_POST["email"]);
             break;
         default:
             echo Dialog::Message("Error", "Existio algun error valide su informacion", true, 0, "Aceptar", true);

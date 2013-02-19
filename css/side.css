@@ -18,6 +18,10 @@ body{font-size: 18px; background-color: #fff;}
                     padding: 15px;
                     color: #fff;
                     font-size: 20px !important;
+                    margin-left: -9px;
+                    margin-right: -9px;
+                    margin-top: -15px;
+                    box-shadow: -5px 10px 10px #cecece;
                 }
         .container-login{
             width:1024px;

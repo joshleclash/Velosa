@@ -133,5 +133,11 @@ class userModel{
 			  return false;
 		   }
         }
+      public function showUser(){
+            $sql = "select * from usuario where idPerfil=2";
+            $rs = $this->components->__executeQuery($sql, $this->components->getConnect());
+            return $rs;
+            
+      }  
 }
 ?>

@@ -20,6 +20,8 @@ if(!isset($_SESSION["_User"]))
         <div class="container-header-login">
             Bienvenido BT- CONSULTORES!
             <?php echo $_SESSION["_User"]->nombreUsuario . " " . $_SESSION["_User"]->apellidoUsuario; ?>
+            <br/>
+            <img src="../images/logo.png" style="height: 40px; box-shadow: -5px -3px 15px #fff;">
             <div style="float: right;"><?php echo Components::getDate();?>
                 <br/>
                 <?php echo $_SESSION["_User"]->nombrePerfil?>    
