@@ -37,7 +37,7 @@ if(!isset($_SESSION["_User"]))
                             <ul>
                                     <li><a method="POST" href="#" id="Usuarios" action="'.PATCH.'/controller/aplicationController.php?option=0" onClick='."submitObjectData('Usuarios','container-data',{'csc':1})".'>Modificar Permisos Usuarios</a></li>
                                     <li><a method="POST" href="#" id="AddFilesToUser" action="'.PATCH.'/controller/aplicationController.php?option=3" onClick='."submitObjectData('AddFilesToUser','container-data',{'csc':1})".'>Ver Archivos por usuario</a></li>
-                                        <li><a method="POST" href="#" id="AddFiles" action="'.PATCH.'/controller/aplicationController.php?option=8" onClick='."submitObjectData('AddFiles','container-data',{'csc':1})".'>Agregar archivos a usuarios</a></li>
+                                    <li><a method="POST" href="#" id="AddFiles" action="'.PATCH.'/controller/aplicationController.php?option=8" onClick='."submitObjectData('AddFiles','container-data',{'csc':1})".'>Agregar archivos a usuarios</a></li>
                                     <li><a method="POST" href="#" id="NewUsuarios" action="'.PATCH.'/controller/aplicationController.php?option=2" onClick='."submitObjectData('NewUsuarios','container-data',{'csc':1})".'>Crear Usuarios</a></li>
                                     
                             </ul>

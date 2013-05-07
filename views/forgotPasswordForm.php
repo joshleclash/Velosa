@@ -1,6 +1,6 @@
 <div style="width: 700px;  height: 395px; padding-top: 50px;" align="center">
-<form style="width: 500px;" class="login" action="<?php echo PATCH?>/controller/UserController.php?option=4" id="formLogin" method="POST" style="background-color: #fff;">
-                <span>Registrar Nuevo Usuario</span>
+<form style="width: 500px;" class="login" action="<?php echo PATCH?>/controller/userController.php?option=4" id="formLogin" method="POST" style="background-color: #fff;">
+    <span>Modificar Contrase&ntilde;a</span>
                 <table style="padding: 10px; margin-left: 30px; width: 85%">
                     <tr>
                         <td>Digite su contrase&ntilde;a anterior</td>

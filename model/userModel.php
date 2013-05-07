@@ -9,7 +9,7 @@ class userModel{
         $this->conect=$this->components->getConnect();
     }
     public function  userExist(){
-    $sql ="select * from usuario where identificacion=".$_REQUEST["identificacion"];
+    $sql ="select * from usuario t1, perfil t2 where t1.idPerfil = t2.idPerfil and t1.identificacion=".$_REQUEST["identificacion"];
         $rs = $this->components->__executeQuery($sql, $this->components->getConnect());
         $rows = mysql_num_rows($rs);
         return $rows;

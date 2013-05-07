@@ -171,14 +171,14 @@ body{font-size: 18px; background-color: #fff;}
             list-style: none;
         }
         .menu-left ul li a{
-            font-family : 'cool_fonts';
+            font-family : 'arial';
             text-decoration: none;
             font-size: 15px;
         }
         .menu-left ul li ul li a{
             font-size:12px;
             color:#fff;
-            font-family : 'cool_fonts';
+            font-family : 'arial';
             text-decoration: none;
         }
         
@@ -201,25 +201,25 @@ body{font-size: 18px; background-color: #fff;}
             font-size: 13px;
             padding: 5px;
             color:#fff;
-            font-family : 'cool_fonts';
+            font-family : 'arial';
         }
         .cebra0{
             padding: 5px;
             font-size: 10px;
             color:#222;
             background-color: #cecece;
-            font-family : 'cool_fonts';
+            font-family : 'arial';
         }
         .cebra1{
             padding: 5px;
             font-size: 10px;
             color:#222;
             background-color: #f4f4f4;
-            font-family : 'cool_fonts';
+            font-family : 'arial';
         }
         #title-span{
             border:0px dotted #222; padding:5px; color:#222222;
-            font-family : 'cool_fonts';
+            font-family : 'arial';
             width: 300px;
             font-size: 14px;
             text-transform: uppercase;

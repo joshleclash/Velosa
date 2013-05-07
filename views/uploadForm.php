@@ -63,7 +63,7 @@
                                                     $rs = $components->__executeQuery($sql, $components->getConnect());
                                                     $mails = $components->getMailsByAdmin();
                                                     $msg="<strong>Se&ntilde;or(a):</strong> Administrador,<br/><br/><br/><br/>";
-                                                    $msg.="El usuario ".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario."a cargado un archivo a el sistema<br/><br/>";
+                                                    $msg.="El usuario \t".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario."a cargado un archivo a el sistema<br/><br/>";
                                                     $msg.="<strong>Nombre Archivo:</strong>".$_FILES["file"]["name"]."<br/>";
                                                     $msg.="<strong>Tipo Archivo:</strong>".$_FILES["file"]["type"]."<br/><br/><br/><br/><br/>";
                                                     $msg.="Señor usuario favor no responda este correo<br/>Correo generado automaticamente".Components::getDate();
@@ -91,7 +91,7 @@
                                             $rsUpdate = $components->__executeQuery($sqlUpdate, $components->getConnect());
                                                     $mails = $components->getMailsByAdmin();
                                                     $msg="<strong>Se&ntilde;or(a):</strong> Administrador,<br/><br/><br/><br/>";
-                                                    $msg.="El usuario ".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario." a modificado un archivo a el sistema<br/><br/>";
+                                                    $msg.="El usuario \t".$_SESSION["_User"]->nombreUsuario."-".$_SESSION["_User"]->apellidoUsuario." a modificado un archivo a el sistema<br/><br/>";
                                                     $msg.="<strong>Nombre Archivo:</strong>".$_FILES["file"]["name"]."<br/>";
                                                     $msg.="<strong>Tipo Archivo:</strong>".$_FILES["file"]["type"]."<br/><br/><br/><br/><br/>";
                                                     $msg.="Señor usuario favor no responda este correo<br/>Correo generado automaticamente".Components::getDate();
