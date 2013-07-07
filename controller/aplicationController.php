@@ -209,7 +209,7 @@ class aplicationController{
                     {
                         $option = '<select id="option'.$row["idArchivo"].'" name="usuarioName" style="max-width:150px;" method="POST" 
                                     action="'.PATCH.'/controller/aplicationController.php?option=9" 
-                                        onChange='."submitObjectData('option$row[idArchivo]','reponse-update$j',{'idUsuario':$rowUser->idUsuario,'idArchivo':$row[idArchivo],'email':'$row[mail]'});".'>';
+                                        onChange='."submitObjectData('option$row[idArchivo]','reponse-update$j',{'idUsuario':$(this).val(),'idArchivo':$row[idArchivo],'email':'$row[mail]'});".'>';
                         //."".
                         $option.='<option>--</opion>';
                         
@@ -251,7 +251,7 @@ class aplicationController{
         $rsUp = $this->components->__executeQuery($sqlUp, $this->components->getConnect());
         if($rsUp){
             $sql = "Select * from archivo file join usuario user on user.idUsuario=file.idUsuario where idArchivo=$idArchivo";
-            $rs = $this->components->__executeQuery($sql, $this->components);
+            $rs = $this->components->__executeQuery($sql, $this->components->getConnect());
             $row = mysql_fetch_object($rs);
                     if(!is_null($mail)){
                         $msg = "Señor Usuario<br/><br/><strong>$row->nombreUsuario - $row->apellidoUsuario</strong>";
@@ -272,6 +272,10 @@ class aplicationController{
                         
                     }
         }
+    }
+    public function showProjectForm(){
+        include_once'../views/formProjecto.php';
+        
     }
 }
 if(isset($_REQUEST["option"])){
@@ -306,8 +310,10 @@ if(isset($_REQUEST["option"])){
              echo $controller->adminFiles();
             break;
         case 9:
-                     
-                echo $controller->updateAdminFile($_POST['idUsuario'],$_POST['idArchivo'],$_POST["email"]);
+             echo $controller->updateAdminFile($_POST['idUsuario'],$_POST['idArchivo'],$_POST["email"]);
+            break;
+        case 10:
+             echo $controller->showProjectForm();
             break;
         default:
             echo Dialog::Message("Error", "Existio algun error valide su informacion", true, 0, "Aceptar", true);

@@ -25,5 +25,11 @@ function sendValueForOption(id,idResponse){
             }
     })
 };
-
+function resetForm(id){
+    $("#"+id+" :input").each(function(csc,object){
+            if($(this).attr('type')=="text"){
+                $(this).val('');
+            }
+        });
+    }
 
