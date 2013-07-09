@@ -1,5 +1,6 @@
 ﻿<?php 
 include_once '../config/config.php';
+include_once '../config/validateSession.php';
 ?>
 <html>
     <head>
@@ -54,7 +55,11 @@ include_once '../config/config.php';
                      
                     <tr>
                         <td>Identificacion</td>
-                        <td colspan="2"><input type="text" name="identificacion"/></td>
+                        <td colspan="2">
+                            <input type="text" name="identificacion"/>
+                            
+                        </td>
+                        
                     </tr>
                      <tr>
                         

@@ -56,7 +56,7 @@ if(isset($_REQUEST["destroySession"]))
                         <td>
                             <input type="button" value="Iniciar sesion" onclick="submitObjectData('formLogin','response',$('#formLogin').serializeArray());"/>  
                         </td>
-                        <td><input type="button" value="Registar Usuario" onClick='window.location="registroUsuario.php"'/>  </td>
+                        
                     </tr>
                 </table>
                 <br/>

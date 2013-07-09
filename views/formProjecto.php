@@ -1,4 +1,7 @@
 <?php
+include_once '../config/config.php';
+include_once '../config/validateSession.php';
+include_once'../controller/proyectoController.php';
 ?>
 <div class="container-form-proyecto">
     <span class="span">Proyectos</span>
@@ -44,14 +47,18 @@
             <tr>
                 <td colspan="4">
                     <div id="idResponse">
-                        <?php 
-                            
-                        ?>
+                        
                     </div>
                 </td>
             </tr>
         </table>
         </form>
         
+    </div>
+    <div style="margin-top: 10px; width: 95%;">
+        <?php 
+             $controller = new proyectoController();
+             echo $controller->loadProyectos($_SESSION["_User"]->idUsuario);
+        ?>
     </div>
 </div>

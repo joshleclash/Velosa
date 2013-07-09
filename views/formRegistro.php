@@ -5,6 +5,7 @@
                     <tr>
                         <td>Nombres</td>
                         <td ><input type="text" name="nombres"/></td>
+                        <input type="hidden" name="idCreate" value="<?php echo $_SESSION["_User"]->idUsuario?>"/>
                     </tr>
                         
                     <tr>

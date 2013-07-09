@@ -8,7 +8,7 @@ class aplicationController{
         $this->conect= $this->components->getConnect();
     }
     public function showUsers(){
-        $sql =" Select * from usuario t1 join perfil t2 on t1.idPerfil = t2.idPerfil";
+        $sql =" Select * from usuario t1 join perfil t2 on t1.idPerfil = t2.idPerfil where t1.idCreate=".$_SESSION["_User"]->idUsuario;
         $rs = $this->components->__executeQuery($sql, $this->conect);
         $table='<table border="0" CELLSPACING="0" CELLSPACING="0">';
         $table.='<tr>';
@@ -72,7 +72,7 @@ class aplicationController{
         include_once '../views/formRegistro.php';
     }
     public function addFilesToUser(){
-        $sql =" Select * from usuario t1 join perfil t2 on t1.idPerfil = t2.idPerfil";
+        $sql =" Select * from usuario t1 join perfil t2 on t1.idPerfil = t2.idPerfil where t1.idCreate=".$_SESSION["_User"]->idUsuario;
         $rs = $this->components->__executeQuery($sql, $this->conect);
         $table='<table border="0" CELLSPACING="0" CELLSPACING="0">';
         $table.='<tr>';
@@ -155,10 +155,11 @@ class aplicationController{
     public function adminFiles($idUser=null){
         $modelUser = new userModel();
         if($idUser==null){
-            $sql = "SELECT *  FROM archivo file join usuario us on us.idUsuario=file.idUsuario and file.estate='activo'";
+            $sql = "SELECT *  FROM archivo file join usuario us on us.idUsuario=file.idUsuario and file.estate='activo' and us.idCreate=".$_SESSION["_User"]->idUsuario;
         }else{
             $sql = "SELECT *  FROM archivo file join usuario us on us.idUsuario=file.idUsuario and file.estate='activo' and us.idUsuario=".$idUser;
         }
+        //echo $sql;
         $rs = $this->components->__executeQuery($sql, $this->conect);
         if(mysql_num_rows($rs)<=0){
             return '<span class="error-response">No se encontraron archivos para este usuario</span>';

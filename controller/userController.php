@@ -1,5 +1,6 @@
 <?php
 include_once '../model/userModel.php';
+include_once '../config/validateSession.php';
 class userController{
     private $userModel = null;
     public function __construct(){

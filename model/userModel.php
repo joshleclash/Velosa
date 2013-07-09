@@ -1,5 +1,6 @@
 <?php
 include_once '../config/config.php';
+include_once '../config/validateSession.php';
 class userModel{
     private $components=null;
     private $conect=null;
@@ -30,8 +31,8 @@ class userModel{
             return array("codeError"=>0,"msg"=>'Este usuario ya esta registrado en el sistema');
         }
         $sql = "INSERT INTO usuario
-                (nombreUsuario, apellidoUsuario, celular, mail, clave, identificacion) 
-                VALUES ('$_REQUEST[nombres]', '$_REQUEST[apellidos]', '$_REQUEST[celular]', '$_REQUEST[mail]', '".$temp."', $_REQUEST[identificacion]);";
+                (nombreUsuario, apellidoUsuario, celular, mail, clave, identificacion,idCreate) 
+                VALUES ('$_REQUEST[nombres]', '$_REQUEST[apellidos]', '$_REQUEST[celular]', '$_REQUEST[mail]', '".$temp."', $_REQUEST[identificacion],$_REQUEST[idCreate]);";
                 $rs = $this->components->__executeQuery($sql,$this->components->getConnect()); 
                 
                 if($rs)
@@ -47,7 +48,7 @@ class userModel{
                         if($send)
                             return array("codeError"=>1,"msg"=>"Usuario creado correctamente");
                         else
-                           return array("codeError"=>0,"msg"=>"Existio algun error en el sistema");
+                            return array("codeError"=>0,"msg"=>"Existio algun error en el sistema");
                     }
     }
     public function loginUser($peticion=null){
@@ -134,7 +135,7 @@ class userModel{
 		   }
      }
       public function showUser(){
-            $sql = "select * from usuario where idPerfil=2";
+            $sql = "select * from usuario where idPerfil=2 and idCreate=".$_SESSION["_User"]->idUsuario;
             $rs = $this->components->__executeQuery($sql, $this->components->getConnect());
             return $rs;
             

@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 include_once '../config/config.php';
+include_once '../config/validateSession.php';
 class proyectoModel{
     private $components=null;
     private $conect=null;

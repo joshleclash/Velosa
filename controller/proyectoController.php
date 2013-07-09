@@ -1,5 +1,6 @@
 <?php
 include_once '../config/config.php';
+include_once '../config/validateSession.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -22,9 +23,49 @@ class proyectoController{
                         return '<span id="ok-response">'.$response['msg'].'</span>';
                     }
     }
+    public function loadProyectos($idUser=null){
+        $modelUser = new userModel();
+        $sql="select * from proyecto where idUsuario=$idUser";
+        $rs = $this->components->__executeQuery($sql, $this->conect);
+        $table="<table border='0' CELLSPACING='0' CELLSPACING='0'>";
+        $table.="<tr>";
+        $table.="<th>Csc</th>";
+        $table.="<th>Nombre Proyecto</th>";
+        $table.="<th>Codigo Interno</th>";
+        $table.="<th>Nombre Auditor</th>";
+        $table.="<th>Correo Auditor</th>";
+        $table.="<th>Usuario Admin</th>";
+        $table.="<th>Agregar Usuario</th>";
+        $table.="</tr>";
+        $i=0;
+        while($row=  mysql_fetch_array($rs)):
+           $table.='<tr class="cebra'.($i%2).'" id="cebra'.$row["idUsuario"].'">';
+           $table.='<th>'.$i.'</th>';
+           $table.='<td>'.$row["nombreProyecto"].'</td>';
+           $table.='<td>'.$row["codigoProyecto"].'</td>';
+           $table.='<td>'.$row["nombreAuditor"].'</td>';
+           $table.='<td>'.$row["mail"].'</td>';
+           $table.='<td>'.$_SESSION["_User"]->nombreUsuario.' '.$_SESSION["_User"]->apellidoUsuario.'</td>'; 
+           $table.='<td>';
+                $rsUser = $modelUser->showUser();
+                $option = '<select name="idProyecto" id="proyecto"'.$row['idProyecto'].' onChange='.
+                            "submitObjectData('proyecto$row[idProyecto],'response-update$i',{'idUsuario':$(this).val(),'idProyecto':$row[idProyecto]'});".
+                            '" action='.PATCH.'/controller/proyectoController.php?option=1'.">";
+                $option .= "<option>--</option>";
+                while($rowUser = mysql_fetch_array($rsUser)):
+                        $option .= "<option value='".$rowUser["idUsuario"]."'>".$rowUser["nombreUsuario"]."-".$rowUser["apellidoUsuario"]."</option>";
+                endwhile;
+                $option .= "</select>";
+           $table.=$option;
+           $table.='</td>';
+           $table.='</tr>';
+           $table.="<tr><td id='response-update$i' colspan='6'></td><tr>";
+           $i++;
+        endwhile;
+        $table.="<table>";
+        return $table;
+    }
 }
-
-
 if(isset($_REQUEST["option"]))
     {
     $proyectoController = new proyectoController();     
@@ -33,9 +74,12 @@ if(isset($_REQUEST["option"]))
             case 0://Save Proyecto.
                  echo  $proyectoController->saveProyecto($_REQUEST);
                 break;
+            case 1:
+                    var_dump($_REQUEST);
+                break;
             default :
-                echo Dialog::Message("Error", "Existio algun error valide su informacion", true, 0, "Aceptar", true);
-                echo '<script>setTimeout(function(){window.location="index.php";},2000);</script>';
+                //echo Dialog::Message("Error", "Existio algun error valide su informacion", true, 0, "Aceptar", true);
+                //echo '<script>setTimeout(function(){window.location="index.php";},2000);</script>';
             break;
             }
     }
