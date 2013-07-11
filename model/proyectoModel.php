@@ -27,9 +27,9 @@ class proyectoModel{
             return $respuesta;
         }
         $sql="INSERT INTO proyecto
-                (nombreProyecto, codigoProyecto, nombreAuditor, idUsuario, mail) 
+                (nombreProyecto, codigoProyecto, nombreAuditor, idUsuario, mail,idCreate) 
                 VALUES ('".$paramsForm["Proyecto"]."', '".$paramsForm["Codigo"]."',
-                '".$paramsForm["Auditor"]."', ".$_SESSION["_User"]->idUsuario.", '".$paramsForm["e-mail"]."');";
+                '".$paramsForm["Auditor"]."', ".$_SESSION["_User"]->idUsuario.", '".$paramsForm["e-mail"]."',".$_SESSION["_User"]->idCreate.");";
         $rs = $this->components->__executeQuery($sql,$this->conect);
             if($rs){
                 $respuesta=array("codeError"=>1,"msg"=>"Proyecto creado correctamente");
@@ -40,6 +40,18 @@ class proyectoModel{
                 return $respuesta;
             }
     }
+	public function saveUsuarioProyecto($idUsuario=null,$idProyecto=null){
+		$sql='insert into usuario_proyecto (idUsuario, idProyecto, idCreate) 
+			 values ('.$idUsuario.','.$idProyecto.','.$_SESSION["_User"]->idUsuario.');';
+			$rs = $this->components->__executeQuery($sql,$this->conect);
+		if($rs){
+					 echo "<script>submitObjectData('NewProyecto','container-data',{'csc':1})</script>";
+					 echo Dialog::Message("Confirmacion", "Asignacion de Proyecto a usuario con exito", true, 0, "Aceptar", true);
+				}
+		else{
+				return Dialog::Message("Error", "Existio algun problema con la asinacin del usuario", true, 0, "Aceptar", true);
+			}
+	}
     
     
     

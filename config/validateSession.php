@@ -5,7 +5,11 @@
  * and open the template in the editor.
  */
 @session_start();
-if(empty($_SESSION["_User"])){
-    header('location:..');
+if(@count($_SESSION["_User"])==0){
+	$location = dirname(dirname(__FILE__));
+	$locationExplode = explode("\\",$location);
+	$position = count($locationExplode)-1;
+	
+   
 }
 ?>

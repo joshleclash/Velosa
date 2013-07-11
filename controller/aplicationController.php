@@ -278,6 +278,41 @@ class aplicationController{
         include_once'../views/formProjecto.php';
         
     }
+	public function showAdminProjectForm(){
+		$sql =" select P.* from proyecto P 
+								where P.idCreate=".$_SESSION["_User"]->idUsuario;
+					
+        $rs = $this->components->__executeQuery($sql, $this->conect);
+        $table='<table border="0" CELLSPACING="0" CELLSPACING="0">';
+        $table.='<tr>';
+        $table.='<th>No</th>';
+        $table.='<th>Nombre Proyecto</th>';
+        $table.='<th>Codigo Proyecto</th>';
+        $table.='<th>Nombre Auditor</th>';
+        $table.='<th>Mail</td>';
+        $table.='<th>Creado Por</td>';
+        $table.='<th>Perfil</th>';
+        $table.='</tr>';
+        $i=1;
+        while($row = mysql_fetch_array($rs)):
+        $table.='<tr class="cebra'.($i%2).'" id="cebra'.$row["idUsuario"].'">';
+        $table.='<th>'.$i.'</th>';
+        $table.='<td align="center">'.$row["nombreProyecto"].'</td>';
+        $table.='<td align="center">'.$row["codigoProyecto"].'</td>';
+        $table.='<td align="center">'.$row["nombreAuditor"].'</td>';
+        $table.='<td align="center">'.$row["mail"].'</td>';
+        $table.='<td align="center">'.$_SESSION["_User"]->nombreUsuario ." ". $_SESSION["_User"]->apellidoUsuario .'</td>';
+        $table.='<td>';
+                $table.='<img src="../images/icons/add.png" title="Agregar archivos a usuario" 
+                        onClick='."submitObjectData('parametros$row[idProyecto]','AddFilesResponse$row[idProyecto]',{idProyecto:$row[idProyecto]});".'
+                     id="parametros'.$row["idProyecto"].'" action="'.PATCH.'/controller/proyectoController.php?option=2" method="POST">';
+        $table.='<td>';
+        $table.='</tr>';
+        $table.='<tr><td colspan="7"><div id="AddFilesResponse'.$row["idProyecto"].'" align="center"></div></td></tr>';
+        $i++;
+        endwhile;
+        return $table;
+	}
 }
 if(isset($_REQUEST["option"])){
     $controller = new aplicationController();    
@@ -316,6 +351,9 @@ if(isset($_REQUEST["option"])){
         case 10:
              echo $controller->showProjectForm();
             break;
+		case 11:
+             echo $controller->showAdminProjectForm();
+            break;	
         default:
             echo Dialog::Message("Error", "Existio algun error valide su informacion", true, 0, "Aceptar", true);
             echo '<script>setTimeout(function(){window.location="index.php";},2000);</script>';
