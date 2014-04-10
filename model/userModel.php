@@ -62,12 +62,13 @@ class userModel{
                 
     endforeach;
     if(!is_numeric($peticion["identificacion"])) {
-       return array("codeError"=>0,"msg"=>"El usuario no puede contener caracteres deve ser numerico"); 
+       return array("codeError"=>0,"msg"=>"El usuario no puede contener caracteres debe ser numerico"); 
     }   
     if(strlen($peticion["password"])<=6){
             return array("codeError"=>0,"msg"=>"La clave es demasiado corta");
         }
         $SQL="select * from usuario us join perfil per on us.idPerfil=per.idPerfil where identificacion=".$peticion["identificacion"];  
+		echo $SQL;
         $rs = $this->components->__executeQuery($SQL,$this->conect);
         $row = mysql_fetch_array($rs);
         if(mysql_affected_rows($this->conect)<=0)
