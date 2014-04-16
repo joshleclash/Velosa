@@ -6,13 +6,13 @@ require_once('PHPMail.php');
 //Example for use Dialog
 //Dialog::Message('pedrito', 'hola', true);
 class Components{
-    public $dbName="btconsul_veloza";
+    public $dbName="btconsul_PRD150414";
     private $conect;
     protected $error='error';
     private static $date=null;
     private $server='cv5.compuvisionenlinea.com';
-    private $user="btconsul_juan";
-    private $password="1019002704@";
+    private $user="btconsul_PRDUSER";
+    private $password="1019002704";
     public function __construct() {
         $this->conect = mysql_connect($this->server, $this->user, $this->password);
         mysql_select_db($this->dbName, $this->conect);

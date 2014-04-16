@@ -249,7 +249,7 @@ class aplicationController{
     }
     public function updateAdminFile($idUsuario=null,$idArchivo=null,$mail=null){
         $sqlUp = "update archivo set idUsuario=$idUsuario where idArchivo=$idArchivo";
-        $rsUp = $this->components->__executeQuery($sqlUp, $this->components->getConnect());
+		$rsUp = $this->components->__executeQuery($sqlUp, $this->components->getConnect());
         if($rsUp){
             $sql = "Select * from archivo file join usuario user on user.idUsuario=file.idUsuario where idArchivo=$idArchivo";
             $rs = $this->components->__executeQuery($sql, $this->components->getConnect());
@@ -262,7 +262,7 @@ class aplicationController{
                         $msg .= "<strong>Observaciones:</strong><br/><br/>$row->description]<br/><br/>";
                         $msg .= "Mensaje generado automaticamente por favor no responder<br/>";
                         $msg .= $this->components->getDate();
-                        $mails = $this->components->sendRsForMail(array($mail,$_SESSION["_User"]->mail), "El administrador le asigno un nuevo archivo", $msg);
+                        $mails = $this->components->sendRsForMail(array($row->mail,$_SESSION["_User"]->mail), "El administrador le asigno un nuevo archivo", $msg);
                         if($mails){
                             return Dialog::Message("Confirmacion", "Se envio una notificacion a el usuario al cual le  fue asignado el archvivo", true, 
                                                 0, "Aceptar");

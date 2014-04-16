@@ -72,23 +72,22 @@ class proyectoController{
 	public function listUserByProject(){
 		$sql="SELECT U.* FROM `usuario_proyecto`  UP
                         inner join proyecto P
-             		   on(UP.idProyecto=P.idProyecto)
-			inner join usuario U
+							on(UP.idProyecto=P.idProyecto)
+						inner join usuario U
                             on(UP.idUsuario=U.idUsuario)						
-			WHERE UP.idProyecto=".$_REQUEST["idProyecto"]." 
-			    group by UP.idUsuario";
-            //echo $sql;    
-            $rs = $this->components->__executeQuery($sql, $this->conect);
-            $table="<table border='0' CELLSPACING='0' CELLSPACING='0'>";
-            $table.="<tr>";
-            $table.="<th>Csc</th>";
-            $table.="<th>Nombres</th>";
-            $table.="<th>Apellidos</th>";
-            $table.="<th>Email</th>";
-            $table.="<th>Celular</th>";
-            $table.="<th>Identificacion</th>";
-            $table.="</tr>";
-	while($row=  mysql_fetch_array($rs)):
+						WHERE UP.idProyecto=".$_REQUEST["idProyecto"]." 
+							group by UP.idUsuario";
+		$rs = $this->components->__executeQuery($sql, $this->conect);
+        $table="<table border='0' CELLSPACING='0' CELLSPACING='0'>";
+        $table.="<tr>";
+        $table.="<th>Csc</th>";
+        $table.="<th>Nombres</th>";
+        $table.="<th>Apellidos</th>";
+        $table.="<th>Email</th>";
+        $table.="<th>Celular</th>";
+		$table.="<th>Identificacion</th>";
+        $table.="</tr>";
+		while($row=  mysql_fetch_array($rs)):
            $table.='<tr class="cebra'.($i%2).'" id="cebra'.$row["idUsuario"].'">';
            $table.='<th>'.$i.'</th>';
            $table.='<td>'.$row["nombreUsuario"].'</td>';
@@ -98,7 +97,7 @@ class proyectoController{
            $table.='<td>'.$row["identificacion"].'</td>';
            $table.='</tr>';
 		   $i++;
-	endwhile;
+		endwhile;
 		$table.="<table>";
 		return $table;
 	}

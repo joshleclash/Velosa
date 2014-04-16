@@ -68,8 +68,7 @@ class userModel{
             return array("codeError"=>0,"msg"=>"La clave es demasiado corta");
         }
         $SQL="select * from usuario us join perfil per on us.idPerfil=per.idPerfil where identificacion=".$peticion["identificacion"];  
-		echo $SQL;
-        $rs = $this->components->__executeQuery($SQL,$this->conect);
+		$rs = $this->components->__executeQuery($SQL,$this->conect);
         $row = mysql_fetch_array($rs);
         if(mysql_affected_rows($this->conect)<=0)
             return array("codeError"=>0,"msg"=>"usuario no resgistrado en el sistema"); 
